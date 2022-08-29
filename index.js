@@ -2,8 +2,11 @@ import  express  from "express";
 import {MongoClient} from "mongodb";
 import dotenv from "dotenv";
 
+
 dotenv.config();
-const app = express()
+const app = express();//call express method;
+const port=process.env.PORT;
+
 
 const movies = [
   { "id": "100", "name": "Iron man 2", "poster": "https://m.media-amazon.com/images/M/MV5BMTM0MDgwNjMyMl5BMl5BanBnXkFtZTcwNTg3NzAzMw@@._V1_FMjpg_UX1000_.jpg", "rating": 7, "summary": "With the world now aware that he is Iron Man, billionaire inventor Tony Stark (Robert Downey Jr.) faces pressure from all sides to share his technology with the military. He is reluctant to divulge the secrets of his armored suit, fearing the information will fall into the wrong hands. With Pepper Potts (Gwyneth Paltrow) and Rhodes (Don Cheadle) by his side, Tony must forge new alliances and confront a powerful new enemy.", "trailer": "https://www.youtube.com/embed/wKtcmiifycU" },
@@ -76,7 +79,7 @@ app.delete('/movies/:num',async function (req, res) {
   res.send(movie);
  })
 
-app.listen(3000,()=>console.log("App is started in port 3000"))// the port is userdefined
+app.listen(port,()=>console.log(`App is started in port ${port}`))// the port is userdefined
 
 
 // when ever use await use async for is an defalut
