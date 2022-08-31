@@ -1,7 +1,8 @@
 import  express  from "express";
 import {MongoClient} from "mongodb";
 import dotenv from "dotenv";
-import {MoviesRouter} from "./routes/movies.js"
+import {MoviesRouter} from "./routes/movies.js";
+import {usersRouter} from "./routes/users.js";
 
 
 dotenv.config();
@@ -39,9 +40,11 @@ app.get('/', function (req, res) {
 })
 
 app.use("/movies",MoviesRouter);
+app.use("/users",usersRouter);
 
 
 app.listen(port,()=>console.log(`App is started in port ${port}`))// the port is userdefined
 
 
-// when ever use await use async for is an defalut
+// when ever use await use async function is an defalut
+
