@@ -21,11 +21,17 @@ async function genHashedpassword(password){
     const {username,password}= req.body;
     const hashedpassword= await genHashedpassword(password);
     const isUserExist= await Client.db("mani").collection("users").findOne({username:username});
-    const result= await Client.db("mani").collection("users").insertOne({username:username,password:hashedpassword})
-     isUserExist ? res.send({msg:"user already exists"}) : res.send(result);
+    
+     if(isUserExist){
+      res.send({msg:"user already exist"})
+     }
+     else{
+      const result= await Client.db("mani").collection("users").insertOne({username:username,password:hashedpassword})
+       res.send(result);
+     }
     
 
-    res.send(isUserExist);
+    
   
   })
     export const usersRouter = router;
