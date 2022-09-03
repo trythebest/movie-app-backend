@@ -2,6 +2,7 @@
 import express from "express";
 import {Client} from "../index.js"
 import { auth } from "../middleware/auth.js";
+import { ObjectId } from "mongodb";
 const router= express.Router();
 
 
@@ -18,7 +19,7 @@ router.get('/', async function (req, res) {
    console.log(req.params);
    const {num}=req.params ;
    //const movie=movies.find((mv)=>mv.id===num)//without mongo db
-   const movie= await Client.db("mani").collection("movies").findOne({id:num});// to get the data form the mongo db
+   const movie= await Client.db("mani").collection("movies").findOne({_id:ObjectId(num)});// to get the data form the mongo db
    movie ? res.send(movie):res.status(404).send({msg : "No such movies find"});
   })
   
@@ -34,7 +35,7 @@ router.get('/', async function (req, res) {
     console.log(req.params);
     const {num}=req.params ;
     //const movie=movies.find((mv)=>mv.id===num)//without mongo db
-    const movie= await Client.db("mani").collection("movies").deleteOne({id:num});// to get the data form the mongo db
+    const movie= await Client.db("mani").collection("movies").deleteOne({_id:ObjectId(num)});// to get the data form the mongo db
     movie.deletedCount > 0 ? res.send(movie):res.status(404).send({msg : "No such movies find"});
    })
   
@@ -43,7 +44,7 @@ router.get('/', async function (req, res) {
     console.log(data);
     const {num}=req.params;
     //const movie=movies.find((mv)=>mv.id===num)//without mongo db
-    const movie= await Client.db("mani").collection("movies").updateOne({id:num},{$set:data});// to get the data form the mongo db
+    const movie= await Client.db("mani").collection("movies").updateOne({_id:ObjectId(num)},{$set:data});// to get the data form the mongo db
     res.send(movie);
    })
     export const MoviesRouter=router;
