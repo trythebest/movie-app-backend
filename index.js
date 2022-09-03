@@ -3,11 +3,13 @@ import {MongoClient} from "mongodb";
 import dotenv from "dotenv";
 import {MoviesRouter} from "./routes/movies.js";
 import {usersRouter} from "./routes/users.js";
+import cors from "cors";
 
 
 dotenv.config();
 const app = express();//call express method;
 const port=process.env.PORT;
+app.use(cors());// to give data from another port
 
 
 const movies = [

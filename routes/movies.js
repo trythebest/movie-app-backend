@@ -1,6 +1,7 @@
 
 import express from "express";
 import {Client} from "../index.js"
+import { auth } from "../middleware/auth.js";
 const router= express.Router();
 
 
@@ -29,7 +30,7 @@ router.get('/', async function (req, res) {
     res.send(result);
   
   })
-  router.delete('/:num',async function (req, res) {
+  router.delete('/:num',auth,async function (req, res) {
     console.log(req.params);
     const {num}=req.params ;
     //const movie=movies.find((mv)=>mv.id===num)//without mongo db
@@ -37,7 +38,7 @@ router.get('/', async function (req, res) {
     movie.deletedCount > 0 ? res.send(movie):res.status(404).send({msg : "No such movies find"});
    })
   
-   router.put('/:num',async function (req, res) {
+   router.put('/:num',auth,async function (req, res) {
     const data=req.body;
     console.log(data);
     const {num}=req.params;
